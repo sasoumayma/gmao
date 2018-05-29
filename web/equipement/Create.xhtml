@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EquipementCreateDlg" widgetVar="EquipementCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEquipementTitle}">
+            <h:form id="EquipementCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{equipementController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateEquipementLabel_designation}" for="designation" />
+                        <p:inputText id="designation" value="#{equipementController.selected.designation}" title="#{bundle.CreateEquipementTitle_designation}" />
+                        <p:outputLabel value="#{bundle.CreateEquipementLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{equipementController.selected.description}" title="#{bundle.CreateEquipementTitle_description}" />
+                        <p:outputLabel value="#{bundle.CreateEquipementLabel_type}" for="type" />
+                        <p:inputText id="type" value="#{equipementController.selected.type}" title="#{bundle.CreateEquipementTitle_type}" />
+                        <p:outputLabel value="#{bundle.CreateEquipementLabel_emplacement}" for="emplacement" />
+                        <p:inputText id="emplacement" value="#{equipementController.selected.emplacement}" title="#{bundle.CreateEquipementTitle_emplacement}" />
+                        <p:outputLabel value="#{bundle.CreateEquipementLabel_affectation}" for="affectation" />
+                        <p:inputText id="affectation" value="#{equipementController.selected.affectation}" title="#{bundle.CreateEquipementTitle_affectation}" />
+                        <p:outputLabel value="#{bundle.CreateEquipementLabel_marque}" for="marque" />
+                        <p:inputText id="marque" value="#{equipementController.selected.marque}" title="#{bundle.CreateEquipementTitle_marque}" />
+                        <p:outputLabel value="#{bundle.CreateEquipementLabel_fournisseur}" for="fournisseur" />
+                        <p:selectOneMenu id="fournisseur" value="#{equipementController.selected.fournisseur}" >
+                            <f:selectItems value="#{fournisseurController.itemsAvailableSelectOne}"
+                                           var="fournisseurItem"
+                                           itemValue="#{fournisseurItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEquipementLabel_dateMiseEnService}" for="dateMiseEnService" />
+                        <p:calendar id="dateMiseEnService" pattern="MM/dd/yyyy" value="#{equipementController.selected.dateMiseEnService}" title="#{bundle.EditEquipementTitle_dateMiseEnService}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateEquipementLabel_details}" for="details" />
+                        <p:inputText id="details" value="#{equipementController.selected.details}" title="#{bundle.CreateEquipementTitle_details}" />
+                        <p:outputLabel value="#{bundle.CreateEquipementLabel_observation}" for="observation" />
+                        <p:inputText id="observation" value="#{equipementController.selected.observation}" title="#{bundle.CreateEquipementTitle_observation}" />
+                        <p:outputLabel value="#{bundle.CreateEquipementLabel_utilisateur}" for="utilisateur" />
+                        <p:selectOneMenu id="utilisateur" value="#{equipementController.selected.utilisateur}" >
+                            <f:selectItems value="#{utilisateurController.itemsAvailableSelectOne}"
+                                           var="utilisateurItem"
+                                           itemValue="#{utilisateurItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEquipementLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{equipementController.selected.id}" title="#{bundle.CreateEquipementTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{equipementController.create}" value="#{bundle.Save}" update="display,:EquipementListForm:datalist,:growl" oncomplete="handleSubmit(args,'EquipementCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EquipementCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PlaningEditDlg" widgetVar="PlaningEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPlaningTitle}">
+            <h:form id="PlaningEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{planingController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPlaningLabel_typePlaning}" for="typePlaning" />
+                        <p:selectOneMenu id="typePlaning" value="#{planingController.selected.typePlaning}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{typePlaningController.itemsAvailableSelectOne}"
+                                           var="typePlaningItem"
+                                           itemValue="#{typePlaningItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPlaningLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{planingController.selected.description}" title="#{bundle.EditPlaningTitle_description}" />
+                        <p:outputLabel value="#{bundle.EditPlaningLabel_mois}" for="mois" />
+                        <p:inputText id="mois" value="#{planingController.selected.mois}" title="#{bundle.EditPlaningTitle_mois}" />
+                        <p:outputLabel value="#{bundle.EditPlaningLabel_annee}" for="annee" />
+                        <p:inputText id="annee" value="#{planingController.selected.annee}" title="#{bundle.EditPlaningTitle_annee}" />
+                        <p:outputLabel value="#{bundle.EditPlaningLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{planingController.selected.id}" title="#{bundle.EditPlaningTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{planingController.update}" value="#{bundle.Save}" update="display,:PlaningListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PlaningEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PlaningEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MaintenanceCreateDlg" widgetVar="MaintenanceCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMaintenanceTitle}">
+            <h:form id="MaintenanceCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{maintenanceController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateMaintenanceLabel_annee}" for="annee" />
+                        <p:inputText id="annee" value="#{maintenanceController.selected.annee}" title="#{bundle.CreateMaintenanceTitle_annee}" />
+                        <p:outputLabel value="#{bundle.CreateMaintenanceLabel_planing}" for="planing" />
+                        <p:selectOneMenu id="planing" value="#{maintenanceController.selected.planing}" >
+                            <f:selectItems value="#{planingController.itemsAvailableSelectOne}"
+                                           var="planingItem"
+                                           itemValue="#{planingItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateMaintenanceLabel_mois}" for="mois" />
+                        <p:inputText id="mois" value="#{maintenanceController.selected.mois}" title="#{bundle.CreateMaintenanceTitle_mois}" />
+                        <p:outputLabel value="#{bundle.CreateMaintenanceLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{maintenanceController.selected.description}" title="#{bundle.CreateMaintenanceTitle_description}" />
+                        <p:outputLabel value="#{bundle.CreateMaintenanceLabel_typeMaintenance}" for="typeMaintenance" />
+                        <p:selectOneMenu id="typeMaintenance" value="#{maintenanceController.selected.typeMaintenance}" >
+                            <f:selectItems value="#{typeMaintenanceController.itemsAvailableSelectOne}"
+                                           var="typeMaintenanceItem"
+                                           itemValue="#{typeMaintenanceItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateMaintenanceLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{maintenanceController.selected.id}" title="#{bundle.CreateMaintenanceTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{maintenanceController.create}" value="#{bundle.Save}" update="display,:MaintenanceListForm:datalist,:growl" oncomplete="handleSubmit(args,'MaintenanceCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MaintenanceCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

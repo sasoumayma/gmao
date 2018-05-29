@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ResponsableMaintenanceCreateDlg" widgetVar="ResponsableMaintenanceCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateResponsableMaintenanceTitle}">
+            <h:form id="ResponsableMaintenanceCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{responsableMaintenanceController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{responsableMaintenanceController.selected.nom}" title="#{bundle.CreateResponsableMaintenanceTitle_nom}" />
+                        <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_matricule}" for="matricule" />
+                        <p:inputText id="matricule" value="#{responsableMaintenanceController.selected.matricule}" title="#{bundle.CreateResponsableMaintenanceTitle_matricule}" />
+                        <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_equipement}" for="equipement" />
+                        <p:selectOneMenu id="equipement" value="#{responsableMaintenanceController.selected.equipement}" >
+                            <f:selectItems value="#{equipementController.itemsAvailableSelectOne}"
+                                           var="equipementItem"
+                                           itemValue="#{equipementItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_utilisateur}" for="utilisateur" />
+                        <p:selectOneMenu id="utilisateur" value="#{responsableMaintenanceController.selected.utilisateur}" >
+                            <f:selectItems value="#{utilisateurController.itemsAvailableSelectOne}"
+                                           var="utilisateurItem"
+                                           itemValue="#{utilisateurItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_prenom}" for="prenom" />
+                        <p:inputText id="prenom" value="#{responsableMaintenanceController.selected.prenom}" title="#{bundle.CreateResponsableMaintenanceTitle_prenom}" />
+                        <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_grade}" for="grade" />
+                        <p:inputText id="grade" value="#{responsableMaintenanceController.selected.grade}" title="#{bundle.CreateResponsableMaintenanceTitle_grade}" />
+                        <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_fonction}" for="fonction" />
+                        <p:inputText id="fonction" value="#{responsableMaintenanceController.selected.fonction}" title="#{bundle.CreateResponsableMaintenanceTitle_fonction}" />
+                        <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_qualification}" for="qualification" />
+                        <p:inputText id="qualification" value="#{responsableMaintenanceController.selected.qualification}" title="#{bundle.CreateResponsableMaintenanceTitle_qualification}" />
+                        <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{responsableMaintenanceController.selected.id}" title="#{bundle.CreateResponsableMaintenanceTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{responsableMaintenanceController.create}" value="#{bundle.Save}" update="display,:ResponsableMaintenanceListForm:datalist,:growl" oncomplete="handleSubmit(args,'ResponsableMaintenanceCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ResponsableMaintenanceCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

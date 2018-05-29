@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TransfertItemCreateDlg" widgetVar="TransfertItemCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTransfertItemTitle}">
+            <h:form id="TransfertItemCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{transfertItemController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTransfertItemLabel_salleSource}" for="salleSource" />
+                        <p:selectOneMenu id="salleSource" value="#{transfertItemController.selected.salleSource}" >
+                            <f:selectItems value="#{salleController.itemsAvailableSelectOne}"
+                                           var="salleSourceItem"
+                                           itemValue="#{salleSourceItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTransfertItemLabel_salleDestination}" for="salleDestination" />
+                        <p:selectOneMenu id="salleDestination" value="#{transfertItemController.selected.salleDestination}" >
+                            <f:selectItems value="#{salleController.itemsAvailableSelectOne}"
+                                           var="salleDestinationItem"
+                                           itemValue="#{salleDestinationItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTransfertItemLabel_transfert}" for="transfert" />
+                        <p:selectOneMenu id="transfert" value="#{transfertItemController.selected.transfert}" >
+                            <f:selectItems value="#{transfertController.itemsAvailableSelectOne}"
+                                           var="transfertItem"
+                                           itemValue="#{transfertItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTransfertItemLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{transfertItemController.selected.id}" title="#{bundle.CreateTransfertItemTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateTransfertItemLabel_quantite}" for="quantite" />
+                        <p:inputText id="quantite" value="#{transfertItemController.selected.quantite}" title="#{bundle.CreateTransfertItemTitle_quantite}" />
+                        <p:outputLabel value="#{bundle.CreateTransfertItemLabel_numeroSerie}" for="numeroSerie" />
+                        <p:inputText id="numeroSerie" value="#{transfertItemController.selected.numeroSerie}" title="#{bundle.CreateTransfertItemTitle_numeroSerie}" />
+                        <p:outputLabel value="#{bundle.CreateTransfertItemLabel_observation}" for="observation" />
+                        <p:inputText id="observation" value="#{transfertItemController.selected.observation}" title="#{bundle.CreateTransfertItemTitle_observation}" />
+                        <p:outputLabel value="#{bundle.CreateTransfertItemLabel_equipement}" for="equipement" />
+                        <p:inputText id="equipement" value="#{transfertItemController.selected.equipement}" title="#{bundle.CreateTransfertItemTitle_equipement}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{transfertItemController.create}" value="#{bundle.Save}" update="display,:TransfertItemListForm:datalist,:growl" oncomplete="handleSubmit(args,'TransfertItemCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TransfertItemCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

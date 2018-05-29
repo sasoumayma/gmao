@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MaintenanceItemViewDlg" widgetVar="MaintenanceItemViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMaintenanceItemTitle}">
+            <h:form id="MaintenanceItemViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{maintenanceItemController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMaintenanceItemLabel_responsableMaintenance}"/>
+                        <h:outputText value="#{maintenanceItemController.selected.responsableMaintenance}" title="#{bundle.ViewMaintenanceItemTitle_responsableMaintenance}"/>
+                        <h:outputText value="#{bundle.ViewMaintenanceItemLabel_description}"/>
+                        <h:outputText value="#{maintenanceItemController.selected.description}" title="#{bundle.ViewMaintenanceItemTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewMaintenanceItemLabel_dateMaintenance}"/>
+                        <h:outputText value="#{maintenanceItemController.selected.dateMaintenance}" title="#{bundle.ViewMaintenanceItemTitle_dateMaintenance}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewMaintenanceItemLabel_equipement}"/>
+                        <h:outputText value="#{maintenanceItemController.selected.equipement}" title="#{bundle.ViewMaintenanceItemTitle_equipement}"/>
+                        <h:outputText value="#{bundle.ViewMaintenanceItemLabel_dateDebutTravaux}"/>
+                        <h:outputText value="#{maintenanceItemController.selected.dateDebutTravaux}" title="#{bundle.ViewMaintenanceItemTitle_dateDebutTravaux}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewMaintenanceItemLabel_dateFinTravaux}"/>
+                        <h:outputText value="#{maintenanceItemController.selected.dateFinTravaux}" title="#{bundle.ViewMaintenanceItemTitle_dateFinTravaux}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewMaintenanceItemLabel_observation}"/>
+                        <h:outputText value="#{maintenanceItemController.selected.observation}" title="#{bundle.ViewMaintenanceItemTitle_observation}"/>
+                        <h:outputText value="#{bundle.ViewMaintenanceItemLabel_id}"/>
+                        <h:outputText value="#{maintenanceItemController.selected.id}" title="#{bundle.ViewMaintenanceItemTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="MaintenanceItemViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

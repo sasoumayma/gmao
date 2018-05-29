@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TypePlaningCreateDlg" widgetVar="TypePlaningCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTypePlaningTitle}">
+            <h:form id="TypePlaningCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{typePlaningController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTypePlaningLabel_libelle}" for="libelle" />
+                        <p:inputText id="libelle" value="#{typePlaningController.selected.libelle}" title="#{bundle.CreateTypePlaningTitle_libelle}" />
+                        <p:outputLabel value="#{bundle.CreateTypePlaningLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{typePlaningController.selected.id}" title="#{bundle.CreateTypePlaningTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{typePlaningController.create}" value="#{bundle.Save}" update="display,:TypePlaningListForm:datalist,:growl" oncomplete="handleSubmit(args,'TypePlaningCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TypePlaningCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

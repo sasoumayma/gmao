@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PlaningItemViewDlg" widgetVar="PlaningItemViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPlaningItemTitle}">
+            <h:form id="PlaningItemViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{planingItemController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPlaningItemLabel_equipement}"/>
+                        <h:outputText value="#{planingItemController.selected.equipement}" title="#{bundle.ViewPlaningItemTitle_equipement}"/>
+                        <h:outputText value="#{bundle.ViewPlaningItemLabel_etat}"/>
+                        <h:outputText value="#{planingItemController.selected.etat}" title="#{bundle.ViewPlaningItemTitle_etat}"/>
+                        <h:outputText value="#{bundle.ViewPlaningItemLabel_categorie}"/>
+                        <h:outputText value="#{planingItemController.selected.categorie}" title="#{bundle.ViewPlaningItemTitle_categorie}"/>
+                        <h:outputText value="#{bundle.ViewPlaningItemLabel_salle}"/>
+                        <h:outputText value="#{planingItemController.selected.salle}" title="#{bundle.ViewPlaningItemTitle_salle}"/>
+                        <h:outputText value="#{bundle.ViewPlaningItemLabel_datePlaning}"/>
+                        <h:outputText value="#{planingItemController.selected.datePlaning}" title="#{bundle.ViewPlaningItemTitle_datePlaning}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPlaningItemLabel_description}"/>
+                        <h:outputText value="#{planingItemController.selected.description}" title="#{bundle.ViewPlaningItemTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewPlaningItemLabel_id}"/>
+                        <h:outputText value="#{planingItemController.selected.id}" title="#{bundle.ViewPlaningItemTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PlaningItemViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EntreeCreateDlg" widgetVar="EntreeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEntreeTitle}">
+            <h:form id="EntreeCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{entreeController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateEntreeLabel_utilisateur}" for="utilisateur" />
+                        <p:selectOneMenu id="utilisateur" value="#{entreeController.selected.utilisateur}" >
+                            <f:selectItems value="#{utilisateurController.itemsAvailableSelectOne}"
+                                           var="utilisateurItem"
+                                           itemValue="#{utilisateurItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEntreeLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{entreeController.selected.id}" title="#{bundle.CreateEntreeTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateEntreeLabel_dateEntree}" for="dateEntree" />
+                        <p:calendar id="dateEntree" pattern="MM/dd/yyyy" value="#{entreeController.selected.dateEntree}" title="#{bundle.EditEntreeTitle_dateEntree}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateEntreeLabel_nombreTotal}" for="nombreTotal" />
+                        <p:inputText id="nombreTotal" value="#{entreeController.selected.nombreTotal}" title="#{bundle.CreateEntreeTitle_nombreTotal}" />
+                        <p:outputLabel value="#{bundle.CreateEntreeLabel_founisseur}" for="founisseur" />
+                        <p:selectOneMenu id="founisseur" value="#{entreeController.selected.founisseur}" >
+                            <f:selectItems value="#{fournisseurController.itemsAvailableSelectOne}"
+                                           var="founisseurItem"
+                                           itemValue="#{founisseurItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{entreeController.create}" value="#{bundle.Save}" update="display,:EntreeListForm:datalist,:growl" oncomplete="handleSubmit(args,'EntreeCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EntreeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

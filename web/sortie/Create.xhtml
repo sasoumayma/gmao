@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SortieCreateDlg" widgetVar="SortieCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSortieTitle}">
+            <h:form id="SortieCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sortieController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSortieLabel_utilisateur}" for="utilisateur" />
+                        <p:selectOneMenu id="utilisateur" value="#{sortieController.selected.utilisateur}" >
+                            <f:selectItems value="#{utilisateurController.itemsAvailableSelectOne}"
+                                           var="utilisateurItem"
+                                           itemValue="#{utilisateurItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateSortieLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{sortieController.selected.id}" title="#{bundle.CreateSortieTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateSortieLabel_fournisseur}" for="fournisseur" />
+                        <p:selectOneMenu id="fournisseur" value="#{sortieController.selected.fournisseur}" >
+                            <f:selectItems value="#{fournisseurController.itemsAvailableSelectOne}"
+                                           var="fournisseurItem"
+                                           itemValue="#{fournisseurItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateSortieLabel_dateSortie}" for="dateSortie" />
+                        <p:calendar id="dateSortie" pattern="MM/dd/yyyy" value="#{sortieController.selected.dateSortie}" title="#{bundle.EditSortieTitle_dateSortie}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateSortieLabel_nombreTotal}" for="nombreTotal" />
+                        <p:inputText id="nombreTotal" value="#{sortieController.selected.nombreTotal}" title="#{bundle.CreateSortieTitle_nombreTotal}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{sortieController.create}" value="#{bundle.Save}" update="display,:SortieListForm:datalist,:growl" oncomplete="handleSubmit(args,'SortieCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SortieCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

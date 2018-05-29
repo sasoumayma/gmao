@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MaintenanceItemEditDlg" widgetVar="MaintenanceItemEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMaintenanceItemTitle}">
+            <h:form id="MaintenanceItemEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{maintenanceItemController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMaintenanceItemLabel_responsableMaintenance}" for="responsableMaintenance" />
+                        <p:selectOneMenu id="responsableMaintenance" value="#{maintenanceItemController.selected.responsableMaintenance}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{responsableMaintenanceController.itemsAvailableSelectOne}"
+                                           var="responsableMaintenanceItem"
+                                           itemValue="#{responsableMaintenanceItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditMaintenanceItemLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{maintenanceItemController.selected.description}" title="#{bundle.EditMaintenanceItemTitle_description}" />
+                        <p:outputLabel value="#{bundle.EditMaintenanceItemLabel_dateMaintenance}" for="dateMaintenance" />
+                        <p:calendar id="dateMaintenance" pattern="MM/dd/yyyy" value="#{maintenanceItemController.selected.dateMaintenance}" title="#{bundle.EditMaintenanceItemTitle_dateMaintenance}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditMaintenanceItemLabel_equipement}" for="equipement" />
+                        <p:selectOneMenu id="equipement" value="#{maintenanceItemController.selected.equipement}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{equipementController.itemsAvailableSelectOne}"
+                                           var="equipementItem"
+                                           itemValue="#{equipementItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditMaintenanceItemLabel_dateDebutTravaux}" for="dateDebutTravaux" />
+                        <p:calendar id="dateDebutTravaux" pattern="MM/dd/yyyy HH:mm:ss" value="#{maintenanceItemController.selected.dateDebutTravaux}" title="#{bundle.EditMaintenanceItemTitle_dateDebutTravaux}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditMaintenanceItemLabel_dateFinTravaux}" for="dateFinTravaux" />
+                        <p:calendar id="dateFinTravaux" pattern="MM/dd/yyyy HH:mm:ss" value="#{maintenanceItemController.selected.dateFinTravaux}" title="#{bundle.EditMaintenanceItemTitle_dateFinTravaux}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditMaintenanceItemLabel_observation}" for="observation" />
+                        <p:inputText id="observation" value="#{maintenanceItemController.selected.observation}" title="#{bundle.EditMaintenanceItemTitle_observation}" />
+                        <p:outputLabel value="#{bundle.EditMaintenanceItemLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{maintenanceItemController.selected.id}" title="#{bundle.EditMaintenanceItemTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{maintenanceItemController.update}" value="#{bundle.Save}" update="display,:MaintenanceItemListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MaintenanceItemEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MaintenanceItemEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

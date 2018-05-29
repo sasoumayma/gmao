@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TransfertItemViewDlg" widgetVar="TransfertItemViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTransfertItemTitle}">
+            <h:form id="TransfertItemViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{transfertItemController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTransfertItemLabel_salleSource}"/>
+                        <h:outputText value="#{transfertItemController.selected.salleSource}" title="#{bundle.ViewTransfertItemTitle_salleSource}"/>
+                        <h:outputText value="#{bundle.ViewTransfertItemLabel_salleDestination}"/>
+                        <h:outputText value="#{transfertItemController.selected.salleDestination}" title="#{bundle.ViewTransfertItemTitle_salleDestination}"/>
+                        <h:outputText value="#{bundle.ViewTransfertItemLabel_transfert}"/>
+                        <h:outputText value="#{transfertItemController.selected.transfert}" title="#{bundle.ViewTransfertItemTitle_transfert}"/>
+                        <h:outputText value="#{bundle.ViewTransfertItemLabel_id}"/>
+                        <h:outputText value="#{transfertItemController.selected.id}" title="#{bundle.ViewTransfertItemTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewTransfertItemLabel_quantite}"/>
+                        <h:outputText value="#{transfertItemController.selected.quantite}" title="#{bundle.ViewTransfertItemTitle_quantite}"/>
+                        <h:outputText value="#{bundle.ViewTransfertItemLabel_numeroSerie}"/>
+                        <h:outputText value="#{transfertItemController.selected.numeroSerie}" title="#{bundle.ViewTransfertItemTitle_numeroSerie}"/>
+                        <h:outputText value="#{bundle.ViewTransfertItemLabel_observation}"/>
+                        <h:outputText value="#{transfertItemController.selected.observation}" title="#{bundle.ViewTransfertItemTitle_observation}"/>
+                        <h:outputText value="#{bundle.ViewTransfertItemLabel_equipement}"/>
+                        <h:outputText value="#{transfertItemController.selected.equipement}" title="#{bundle.ViewTransfertItemTitle_equipement}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TransfertItemViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
